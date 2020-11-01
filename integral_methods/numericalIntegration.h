@@ -10,9 +10,10 @@ double trapezoidal(double (*cal)(double), double start, double end, long n) {
 	}
 
 	if (end < start) {
-		start += end;
-		end = start - end;
-		start = start - end;
+		double temp;
+		temp = start;
+		start = end;
+		end = temp;
 		flag = -1;
 	}
 	
@@ -28,3 +29,64 @@ double trapezoidal(double (*cal)(double), double start, double end, long n) {
 	}
 	return (h / 2) * sum * flag;
 }
+
+double doubleTrapezoidal(double (*cal)(double, double), double x_start, double x_end, double y_start, double y_end, long x_n, long y_n) {
+	int x_flag = 1;
+	int y_flag = 1;
+
+	if (x_n < 1) {
+		printf("Logical Error: number of divisions for x, less than 1");
+		exit(-1);
+	}
+	if (x_end < x_start) {
+		double temp;
+		temp = x_start;
+		x_start = x_end;
+		x_end = temp;
+		x_flag = -1;
+	}
+
+	if (y_n < 1) {
+		printf("Logical Error: number of divisions for y, less than 1");
+		exit(-1);
+	}
+
+	if (y_end < y_start) {
+		double temp;
+		temp = y_start;
+		y_start = y_end;
+		y_end = temp;
+		y_flag = -1;
+	}
+
+	double x_h = (x_end - x_start) / x_n;
+	double y_h = (y_end - y_start) / y_n;
+	
+	double sum = 0;
+	double curr_sum;
+
+	double x_val = x_start;
+	double y_val = y_start;
+
+	for (int i = 0; i <= x_n; i++) {
+
+		y_val = y_start;
+
+		for (int j = 0; j <= y_n; j++) {
+			curr_sum = (*cal)(x_val, y_val);
+
+			if (i != 0 && i != x_n) curr_sum = curr_sum * 2;
+			if (j != 0 && j != y_n) curr_sum = curr_sum * 2;
+
+			sum = sum + curr_sum;
+			y_val = y_val + y_h;
+		}
+
+		x_val = x_val + x_h;
+	}
+
+	return (x_h * y_h / 4) * sum * x_flag * y_flag;
+
+}
+
+
