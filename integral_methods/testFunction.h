@@ -18,7 +18,7 @@ double log_x (double x) {
 }
 
 double poly1 (double x) {
-	return 2 * pow(x, 2) - 3 * pow(x, 1) + 4 * pow(x, 1);
+	return 2 * pow(x, 2) - 3 * pow(x, 1) + 4 * pow(x, 0);
 }
 
 double xy_square(double x, double y) {

@@ -8,24 +8,24 @@ int main() {
 	double start = 3;
 	double end = 3.1;
 	FILE *fp;
-	fp = fopen("TrapezOut1.txt", "w");
+	fp = fopen("simpOut1.txt", "w");
 
 	for (int i = 0; i < 10000; i++) {
-		fprintf(fp, "%lf\t%lf\n", end, trapezoidal(x_cube, start, end, n));
+		fprintf(fp, "%lf\t%lf\n", end, simpsonOneThird(x_cube, start, end, n));
 		end = end + 0.001;
 	}
 	fclose(fp);
-	fp = fopen("TrapezOut2.txt", "w");
-	end = 3.1;
+	fp = fopen("simpOut2.txt", "w");
+	end  = 3.1;
 	for (int i = 0; i < 10000; i++) {
-		fprintf(fp, "%lf\t%lf\n", end, trapezoidal(log_x, start, end, n));
+		fprintf(fp, "%lf\t%lf\n", end, simpsonOneThird(log_x, start, end, n));
 		end = end + 0.001;
 	}
 	fclose(fp);
-	fp = fopen("TrapezOut3.txt", "w");
+	fp = fopen("simpOut3.txt", "w");
 	end = 3.1;
 	for (int i = 0; i < 10000; i++) {
-		fprintf(fp, "%lf\t%lf\n", end, trapezoidal(poly1, start, end, n));
+		fprintf(fp, "%lf\t%lf\n", end, simpsonOneThird(poly1, start, end, n));
 		end = end + 0.001;
 	}
 	fclose(fp);
